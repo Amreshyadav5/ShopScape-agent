@@ -59,13 +59,13 @@ export const Navbar: React.FC<NavbarProps> = ({
         boxShadow: '0 1px 0 var(--border-light)',
       }}
     >
-      <div className="container mx-auto" style={{ padding: '0 1.5rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', height: '64px' }}>
+      <div className="container mx-auto">
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', height: '58px' }}>
 
           {/* Brand wordmark */}
           <div
             onClick={() => onNavigate('home')}
-            style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', cursor: 'pointer', flexShrink: 0 }}
+            style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', flexShrink: 0 }}
           >
             <div style={{
               width: '32px', height: '32px',
@@ -102,7 +102,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Search bar — desktop */}
-          <div style={{ flex: 1, maxWidth: '440px', display: 'none' }} className="md:block"
+          <div className="hidden md:block" style={{ flex: 1, maxWidth: '440px' }}
             suppressHydrationWarning
           >
             <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
@@ -185,8 +185,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
           </div>
 
-          {/* Nav links */}
-          <nav style={{ display: 'flex', alignItems: 'center', gap: '0.125rem', marginLeft: 'auto' }}>
+          {/* Nav links — desktop only (screens >= 900px) */}
+          <nav className="navbar-nav-links">
             {[
               { id: 'home', label: 'Home' },
               { id: 'catalog', label: 'Shop' },
@@ -251,10 +251,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </nav>
 
-          {/* Right actions */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
+          {/* Right actions — desktop only (>= 900px) */}
+          <div className="navbar-actions-desktop">
 
-            {/* AI Agent button — restrained */}
+            {/* AI Agent button */}
             <button
               onClick={onOpenAIAssistant}
               style={{
@@ -280,7 +280,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               }}
             >
               <Sparkles style={{ width: '13px', height: '13px' }} />
-              <span className="hidden sm:inline">AI Guide</span>
+              <span>AI Guide</span>
             </button>
 
             {/* Cart */}
@@ -330,7 +330,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Auth */}
             {user ? (
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', paddingLeft: '0.5rem', borderLeft: '1px solid var(--border-light)' }}>
-                {/* Profile Trigger Button */}
                 <button
                   onClick={onOpenProfile}
                   title="View User Profile & Orders"
@@ -354,7 +353,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                     e.currentTarget.style.borderColor = 'transparent';
                   }}
                 >
-                  {/* Initials Avatar */}
                   <div style={{
                     width: '30px',
                     height: '30px',
@@ -371,7 +369,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   }}>
                     {user.full_name.split(' ').map((n) => n[0]).filter(Boolean).slice(0, 2).join('').toUpperCase()}
                   </div>
-                  <div className="hidden md:block" style={{ textAlign: 'left' }}>
+                  <div style={{ textAlign: 'left' }}>
                     <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.2 }}>
                       {user.full_name}
                     </div>
@@ -425,6 +423,78 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onMouseLeave={(e) => e.currentTarget.style.background = 'none'}
               >
                 <User style={{ width: '13px', height: '13px' }} />
+                Sign In
+              </button>
+            )}
+          </div>
+
+          {/* Right actions — mobile app bar (< 900px, Flipkart/Myntra style) */}
+          <div className="navbar-actions-mobile">
+            {/* Quick Cart button */}
+            <button
+              onClick={onOpenCart}
+              title="Cart"
+              style={{
+                position: 'relative',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                width: '36px', height: '36px',
+                background: '#f4f0e8',
+                border: '1px solid var(--border-light)',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                color: 'var(--text-primary)',
+              }}
+            >
+              <ShoppingBag style={{ width: '17px', height: '17px' }} />
+              {cartItemCount > 0 && (
+                <span style={{
+                  position: 'absolute',
+                  top: '-5px', right: '-5px',
+                  minWidth: '17px', height: '17px',
+                  background: 'var(--green-500)',
+                  color: '#fff',
+                  fontSize: '0.625rem',
+                  fontWeight: 700,
+                  borderRadius: '9px',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  padding: '0 3px',
+                }}>
+                  {cartItemCount}
+                </span>
+              )}
+            </button>
+
+            {/* Profile / Auth trigger */}
+            {user ? (
+              <button
+                onClick={onOpenProfile}
+                style={{
+                  width: '32px', height: '32px',
+                  borderRadius: '50%',
+                  background: 'var(--green-100)',
+                  border: '1px solid var(--green-300)',
+                  color: 'var(--green-700)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: '0.75rem', fontWeight: 700,
+                  cursor: 'pointer',
+                }}
+              >
+                {user.full_name.split(' ').map((n) => n[0]).filter(Boolean).slice(0, 2).join('').toUpperCase()}
+              </button>
+            ) : (
+              <button
+                onClick={onOpenAuth}
+                style={{
+                  padding: '0.35rem 0.625rem',
+                  fontSize: '0.75rem',
+                  fontWeight: 600,
+                  color: 'var(--green-700)',
+                  background: 'var(--green-50)',
+                  border: '1px solid var(--green-200)',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                }}
+              >
                 Sign In
               </button>
             )}
@@ -502,18 +572,21 @@ export const Navbar: React.FC<NavbarProps> = ({
         style={{
           borderTop: '1px solid var(--border-light)',
           background: '#f8faf7',
-          padding: '0.4rem 0',
+          padding: '0.35rem 0',
+          width: '100%',
+          overflow: 'hidden',
         }}
       >
         <div
           className="container mx-auto"
           style={{
-            padding: '0 1.5rem',
             display: 'flex',
             alignItems: 'center',
             gap: '0.5rem',
             overflowX: 'auto',
+            WebkitOverflowScrolling: 'touch',
             scrollbarWidth: 'none',
+            maxWidth: '100%',
           }}
         >
           {DEPARTMENTS.map((dept) => {

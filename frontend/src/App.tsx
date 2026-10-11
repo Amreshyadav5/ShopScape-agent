@@ -997,10 +997,21 @@ export function App() {
                 display: 'flex', flexWrap: 'wrap',
                 alignItems: 'center', justifyContent: 'space-between',
                 gap: '0.75rem', marginBottom: '1.25rem',
+                width: '100%',
               }}>
 
                 {/* Tailored Department subcategory tabs */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', overflowX: 'auto', paddingBottom: '2px', flex: 1 }}>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.375rem',
+                  overflowX: 'auto',
+                  WebkitOverflowScrolling: 'touch',
+                  paddingBottom: '2px',
+                  flex: '1 1 auto',
+                  minWidth: 0,
+                  maxWidth: '100%',
+                }}>
                   {(() => {
                     const activeDept = DEPARTMENT_CONFIG[selectedDepartment] || DEPARTMENT_CONFIG['all'];
                     return activeDept.subcategories.map((subcat) => {
