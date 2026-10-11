@@ -1,0 +1,29 @@
+/* App.css — ShopScape brand overrides */
+/* Most styles live in index.css via CSS custom properties */
+/* This file handles responsive utilities and minor overrides */
+
+/* Responsive grid utilities */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+/* Product grid responsive */
+@media (max-width: 480px) {
+  [style*="minmax(220px"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Ensure md:block / md:hidden work via Tailwind */
+@media (min-width: 768px) {
+  .md\:block { display: block !important; }
+  .md\:hidden { display: none !important; }
+}
+
+/* sm:inline */
+@media (min-width: 640px) {
+  .sm\:inline { display: inline !important; }
+  .hidden.sm\:inline { display: inline !important; }
+}

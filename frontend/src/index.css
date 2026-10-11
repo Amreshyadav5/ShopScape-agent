@@ -1,0 +1,385 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ============================================
+   DESIGN TOKENS — ShopScape Brand System
+   Warm ivory × forest green editorial identity
+   ============================================ */
+:root {
+  /* Backgrounds */
+  --bg-page:       #f9f6f1;   /* warm ivory */
+  --bg-surface:    #ffffff;   /* card surfaces */
+  --bg-muted:      #f3ede4;   /* subtle warm tint */
+  --bg-strong:     #ede5d8;   /* stronger warm */
+  --bg-dark:       #1a2412;   /* rich near-black forest */
+
+  /* Typography */
+  --text-primary:  #1c2a14;   /* deep forest */
+  --text-secondary:#3d4f2e;   /* forest mid */
+  --text-muted:    #7a7060;   /* warm taupe */
+  --text-light:    #b0a490;   /* light warm grey */
+  --text-on-dark:  #f4efe7;   /* ivory on dark */
+
+  /* Brand Green */
+  --green-50:      #f0f5ea;
+  --green-100:     #d9ebca;
+  --green-200:     #b3d496;
+  --green-300:     #7db85c;
+  --green-400:     #5a9e3a;
+  --green-500:     #3d7a28;   /* primary brand green */
+  --green-600:     #2e5e1c;
+  --green-700:     #1f4212;
+  --green-800:     #142d0c;
+
+  /* Amber/Warm accent */
+  --amber-400:     #d4a843;
+  --amber-500:     #b8922a;
+
+  /* Borders */
+  --border-light:  #e8dfd1;   /* delicate separator */
+  --border-mid:    #d4c9b8;   /* card border */
+  --border-strong: #b8aa98;   /* stronger delineation */
+
+  /* Radii — restrained, not pill-shaped */
+  --radius-xs:     3px;
+  --radius-sm:     5px;
+  --radius-md:     8px;
+  --radius-lg:     12px;
+
+  /* Shadows — paper-like, not glow-based */
+  --shadow-xs:     0 1px 3px rgba(28, 42, 20, 0.06);
+  --shadow-sm:     0 2px 8px rgba(28, 42, 20, 0.08);
+  --shadow-md:     0 4px 16px rgba(28, 42, 20, 0.10);
+  --shadow-lg:     0 8px 24px rgba(28, 42, 20, 0.12);
+
+  /* Transitions */
+  --ease:          0.18s ease;
+  --ease-out:      0.22s cubic-bezier(0.0, 0, 0.2, 1);
+
+  /* Typography scale */
+  --font-body:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display:  'Playfair Display', Georgia, serif;
+}
+
+/* ============================================
+   BASE RESET
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-muted); }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ============================================
+   TYPOGRAPHY HELPERS
+   ============================================ */
+.font-display { font-family: var(--font-display); }
+
+/* ============================================
+   BUTTONS — One primary, one secondary, one ghost
+   ============================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1;
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background var(--ease), color var(--ease), border-color var(--ease), box-shadow var(--ease);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--green-500);
+  outline-offset: 2px;
+}
+
+/* Primary — forest green, confident */
+.btn-primary {
+  background: var(--green-500);
+  color: #ffffff;
+  border-color: var(--green-500);
+}
+.btn-primary:hover {
+  background: var(--green-600);
+  border-color: var(--green-600);
+}
+.btn-primary:active {
+  background: var(--green-700);
+}
+
+/* Secondary — outlined */
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-mid);
+}
+.btn-secondary:hover {
+  background: var(--bg-muted);
+  border-color: var(--border-strong);
+}
+
+/* Ghost — minimal */
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: transparent;
+}
+.btn-ghost:hover {
+  background: var(--bg-muted);
+  color: var(--text-primary);
+}
+
+/* Sizes */
+.btn-sm {
+  font-size: 0.8125rem;
+  padding: 0.4rem 0.875rem;
+}
+
+.btn-lg {
+  font-size: 0.9375rem;
+  padding: 0.75rem 1.625rem;
+}
+
+/* ============================================
+   FORM INPUTS
+   ============================================ */
+.input {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  transition: border-color var(--ease), box-shadow var(--ease);
+}
+
+.input::placeholder { color: var(--text-light); }
+
+.input:focus {
+  outline: none;
+  border-color: var(--green-400);
+  box-shadow: 0 0 0 3px rgba(90, 158, 58, 0.12);
+}
+
+/* ============================================
+   CATEGORY LABEL — restrained, organic
+   ============================================ */
+.category-label {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--green-500);
+}
+
+/* ============================================
+   CARD — paper-like, not glassy
+   ============================================ */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: box-shadow var(--ease-out), border-color var(--ease-out);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-mid);
+}
+
+/* ============================================
+   SECTION DIVIDER
+   ============================================ */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--border-light);
+}
+
+/* ============================================
+   ANNOUNCEMENT BAR
+   ============================================ */
+.announcement-bar {
+  background: var(--bg-dark);
+  color: var(--text-on-dark);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+
+.announcement-bar strong {
+  font-weight: 600;
+}
+
+/* ============================================
+   HERO & ARTISTIC SCENIC STYLES
+   ============================================ */
+.hero-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .hero-layout-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 3.5rem;
+  }
+}
+
+.hero-art-card {
+  position: relative;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 24px 50px -14px rgba(35, 54, 25, 0.24), 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background: #ede6d8;
+  aspect-ratio: 4 / 3;
+  max-height: 440px;
+}
+
+.hero-art-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-art-card:hover .hero-art-image {
+  transform: scale(1.035);
+}
+
+.hero-trust-dock {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px -4px rgba(28, 42, 20, 0.05);
+  margin-top: 3rem;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .hero-trust-dock {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-trust-dock {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.trust-item-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 1.125rem 1.375rem;
+  border-bottom: 1px solid var(--border-light);
+  transition: background 0.15s ease;
+}
+
+@media (min-width: 640px) {
+  .trust-item-cell:nth-child(odd) {
+    border-right: 1px solid var(--border-light);
+  }
+}
+
+@media (min-width: 1024px) {
+  .trust-item-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-light);
+  }
+  .trust-item-cell:last-child {
+    border-right: none;
+  }
+}
+
+.trust-item-cell:hover {
+  background: #fbf9f5;
+}
+
+/* ============================================
+   ANIMATIONS — subtle only
+   ============================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.3s ease-out forwards;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* ============================================
+   SELECTION
+   ============================================ */
+::selection {
+  background: var(--green-100);
+  color: var(--green-700);
+}
