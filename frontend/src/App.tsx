@@ -23,6 +23,7 @@ import { PolicyModal } from './components/PolicyModal';
 import { UserProfileModal } from './components/UserProfileModal';
 import { Footer } from './components/Footer';
 import { FullScreenAIAssistant } from './components/FullScreenAIAssistant';
+import { MobileBottomNav } from './components/MobileBottomNav';
 
 export function App() {
   // Navigation & Config
@@ -415,11 +416,7 @@ export function App() {
                   </button>
                 </div>
 
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
-                  gap: '0.875rem',
-                }}>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3.5">
                   {departmentCards.map((dept) => (
                     <button
                       key={dept.slug}
@@ -510,11 +507,7 @@ export function App() {
                   </button>
                 </div>
 
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-                  gap: '1.125rem',
-                }}>
+                <div className="product-grid-commerce">
                   {featuredProducts.map((prod) => (
                     <ProductCard
                       key={prod.id}
@@ -585,11 +578,7 @@ export function App() {
                   </div>
                 </div>
 
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-                  gap: '1.125rem',
-                }}>
+                <div className="product-grid-commerce">
                   {sabjiProducts.map((prod) => (
                     <ProductCard
                       key={prod.id}
@@ -661,11 +650,7 @@ export function App() {
                   </div>
                 </div>
 
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-                  gap: '1.125rem',
-                }}>
+                <div className="product-grid-commerce">
                   {clothingProducts.map((prod) => (
                     <ProductCard
                       key={prod.id}
@@ -736,11 +721,7 @@ export function App() {
                   </div>
                 </div>
 
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-                  gap: '1.125rem',
-                }}>
+                <div className="product-grid-commerce">
                   {drinksProducts.map((prod) => (
                     <ProductCard
                       key={prod.id}
@@ -811,11 +792,7 @@ export function App() {
                   </div>
                 </div>
 
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-                  gap: '1.125rem',
-                }}>
+                <div className="product-grid-commerce">
                   {electronicsProducts.map((prod) => (
                     <ProductCard
                       key={prod.id}
@@ -860,11 +837,7 @@ export function App() {
                   </button>
                 </div>
 
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-                  gap: '1.125rem',
-                }}>
+                <div className="product-grid-commerce">
                   {pantryProducts.map((prod) => (
                     <ProductCard
                       key={prod.id}
@@ -1278,12 +1251,7 @@ export function App() {
                 </div>
               ) : (
                 <div>
-                  <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-                    gap: '1.125rem',
-                    marginBottom: '2.5rem',
-                  }}>
+                  <div className="product-grid-commerce" style={{ marginBottom: '2.5rem' }}>
                     {products.map((prod) => (
                       <ProductCard
                         key={prod.id}
@@ -1462,6 +1430,22 @@ export function App() {
           onOpenAIAssistant={() => navigateToView('assistant')}
         />
       )}
+
+      {/* Mobile Bottom App Navigation (Myntra / Flipkart Experience) */}
+      <MobileBottomNav
+        currentView={currentView}
+        onNavigate={navigateToView}
+        cartCount={cart?.items ? cart.items.reduce((sum, item) => sum + item.quantity, 0) : 0}
+        onOpenCart={() => setIsCartOpen(true)}
+        onOpenProfile={() => {
+          if (user) {
+            setIsProfileOpen(true);
+          } else {
+            setIsAuthOpen(true);
+          }
+        }}
+        user={user}
+      />
     </div>
   );
 }

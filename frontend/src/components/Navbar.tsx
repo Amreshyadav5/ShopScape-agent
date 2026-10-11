@@ -431,45 +431,66 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
 
-        {/* Mobile search — visible on small screens */}
-        <div className="md:hidden" style={{ paddingBottom: '0.625rem' }}>
+        {/* Mobile search — Flipkart/Myntra style prominent app search */}
+        <div className="md:hidden" style={{ padding: '0 0.25rem 0.625rem 0.25rem' }}>
           <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
             <Search style={{
-              position: 'absolute', left: '0.625rem',
-              width: '14px', height: '14px',
+              position: 'absolute', left: '0.75rem',
+              width: '15px', height: '15px',
               color: 'var(--text-light)', pointerEvents: 'none',
             }} />
             <input
               type="text"
-              placeholder="Search…"
+              placeholder="Search sabji, honey, apparel, drinks, tech…"
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
               onKeyDown={handleKeyDown}
               style={{
                 width: '100%',
-                paddingLeft: '2rem',
-                paddingRight: '4.5rem',
-                paddingTop: '0.45rem',
-                paddingBottom: '0.45rem',
-                background: 'var(--bg-muted)',
+                paddingLeft: '2.25rem',
+                paddingRight: '4.75rem',
+                paddingTop: '0.55rem',
+                paddingBottom: '0.55rem',
+                background: '#f4f0e8',
                 border: '1px solid var(--border-light)',
-                borderRadius: '6px',
+                borderRadius: '8px',
                 fontSize: '0.8125rem',
                 color: 'var(--text-primary)',
                 outline: 'none',
               }}
             />
-            <div style={{ position: 'absolute', right: '0.375rem', display: 'flex', gap: '0.25rem' }}>
-              <button onClick={onOpenVisualSearch} style={{ padding: '0.25rem', background: 'none', border: 'none', color: 'var(--text-light)', cursor: 'pointer' }}>
-                <Camera style={{ width: '13px', height: '13px' }} />
+            <div style={{ position: 'absolute', right: '0.375rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+              <button
+                type="button"
+                onClick={onOpenVisualSearch}
+                title="Camera search"
+                style={{
+                  padding: '0.3rem',
+                  background: 'none',
+                  border: 'none',
+                  color: 'var(--green-600)',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <Camera style={{ width: '15px', height: '15px' }} />
               </button>
-              <button onClick={onSearchSubmit} style={{
-                padding: '0.25rem 0.5rem',
-                background: 'var(--green-500)', color: '#fff',
-                border: 'none', borderRadius: '4px',
-                fontSize: '0.75rem', fontWeight: 500, cursor: 'pointer',
-              }}>
-                Go
+              <button
+                type="button"
+                onClick={onSearchSubmit}
+                style={{
+                  padding: '0.3rem 0.625rem',
+                  background: 'var(--green-500)',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '6px',
+                  fontSize: '0.75rem',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                }}
+              >
+                Search
               </button>
             </div>
           </div>

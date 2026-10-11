@@ -352,6 +352,67 @@ button, input, select, textarea {
   }
 }
 
+/* ============================================
+   MOBILE APP COMMERCE (Flipkart & Myntra Style)
+   ============================================ */
+
+/* 2-Column Responsive Product Grid on Mobile Devices */
+.product-grid-commerce {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.625rem;
+}
+
+@media (min-width: 640px) {
+  .product-grid-commerce {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-grid-commerce {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+/* Mobile-Friendly Product Card Polish */
+@media (max-width: 640px) {
+  .product-card-body {
+    padding: 0.625rem !important;
+    gap: 0.35rem !important;
+  }
+
+  .product-card-title {
+    font-size: 0.8125rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .product-card-desc {
+    display: none !important; /* Hide long paragraphs in 2-column mobile grid like Myntra/Flipkart */
+  }
+
+  .product-card-price {
+    font-size: 0.875rem !important;
+  }
+
+  .product-card-btn {
+    padding: 0.35rem 0.5rem !important;
+    font-size: 0.7rem !important;
+  }
+
+  /* Safe padding for fixed bottom app navigation */
+  .mobile-safe-bottom {
+    padding-bottom: 5.5rem !important;
+  }
+
+  /* Touch tap highlight removal for native app feel */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
 .trust-item-cell:hover {
   background: #fbf9f5;
 }

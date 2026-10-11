@@ -177,7 +177,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       </div>
 
       {/* Card content */}
-      <div style={{ padding: '0.875rem 1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+      <div className="product-card-body" style={{ padding: '0.875rem 1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
 
         {/* Category + Rating row */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -198,7 +198,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         {/* Product name */}
-        <h3 style={{
+        <h3 className="product-card-title" style={{
           fontFamily: 'var(--font-body)',
           fontSize: '0.875rem',
           fontWeight: 600,
@@ -214,7 +214,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
         {/* Short description */}
         {(product.short_description || product.description) && (
-          <p style={{
+          <p className="product-card-desc" style={{
             fontSize: '0.75rem',
             color: 'var(--text-muted)',
             lineHeight: 1.5,
@@ -237,7 +237,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           gap: '0.5rem',
         }}>
           <div>
-            <div style={{
+            <div className="product-card-price" style={{
               fontSize: '1rem',
               fontWeight: 700,
               color: 'var(--text-primary)',
@@ -252,6 +252,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
           <button
             type="button"
+            className="product-card-btn"
             disabled={isOutOfStock}
             onClick={handleAdd}
             style={{
