@@ -1,6 +1,6 @@
 import type { Product, Category, Cart, User, Order, AdminMetrics, StoreConfig } from './types';
 
-const API_BASE = '/api';
+const API_BASE = ((import.meta as any).env?.VITE_API_BASE_URL || '').replace(/\/$/, '') + '/api';
 
 function getSessionId(): string {
   let sid = localStorage.getItem('shopease_session_id');

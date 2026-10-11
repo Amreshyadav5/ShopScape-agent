@@ -15,7 +15,24 @@ class Settings:
     API_PREFIX: str = "/api"
     
     # Database
-    DATABASE_URL: str = os.getenv("DATABASE_URL", f"sqlite:///{BASE_DIR}/store.db")
+    @staticmethod
+    def _resolve_db_url() -> str:
+        env_url = os.getenv("DATABASE_URL")
+        if env_url:
+            return env_url
+        if os.getenv("VERCEL"):
+            import shutil
+            tmp_db = "/tmp/store.db"
+            orig_db = os.path.join(BASE_DIR, "store.db")
+            if not os.path.exists(tmp_db) and os.path.exists(orig_db):
+                try:
+                    shutil.copyfile(orig_db, tmp_db)
+                except Exception:
+                    pass
+            return f"sqlite:///{tmp_db}"
+        return f"sqlite:///{BASE_DIR}/store.db"
+
+    DATABASE_URL: str = _resolve_db_url()
     
     # Security
     SECRET_KEY: str = os.getenv("SECRET_KEY", "super-secret-ecommerce-jwt-key-change-in-production-2026")
